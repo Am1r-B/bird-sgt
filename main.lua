@@ -37,10 +37,16 @@ function love.update(dt)
     resetPipe()
   end
   
-  -- if bird collide with the top pipe segment
-  if birdX < pipeX + pipeWidth
-  and birdX + birdWidth > pipeX
-  and birdY < pipeSpaceY then
+  -- if bird collide with the pipe
+  if
+  birdX < pipeX + pipeWidth
+  and
+  birdX + birdWidth > pipeX
+  and (
+    birdY < pipeSpaceY
+    or
+    birdY + birdHeight > pipeSpaceY + pipeSpaceHeight
+  ) then
     love.load()
   end
 end
