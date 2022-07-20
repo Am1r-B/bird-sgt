@@ -14,6 +14,10 @@ function love.update(dt)
   birdY = birdY + birdYSpeed * dt
 end
 
+function love.keypressed()
+  birdYSpeed = -165
+end
+
 function love.draw()
   -- draw background
   love.graphics.setColor(.14, .36, .46)
