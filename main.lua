@@ -12,31 +12,27 @@ function love.load()
   pipeSpaceHeight = 100
   
   -- a function that resets pipe 
-  function resetPipe()
+  function newPipeSpaceY()
     local pipeSpaceYMin = 54
     -- random pipe Space location
-    pipeSpaceY = love.math.random(
+    return love.math.random(
       pipeSpaceYMin,
       playingAreaHeight - pipeSpaceHeight - pipeSpaceYMin
     )
-    
-    pipeX = playingAreaWidth
   end
   
-  resetPipe()
-  
   pipe1X = 100
-  pipe1SpaceY = 100
+  pipe1SpaceY = newPipeSpaceY()
   
   pipe2X = 200
-  pipe2SpaceY = 200
+  pipe2SpaceY = newPipeSpaceY()
 end
 
 function love.update(dt)
   -- bird falling down
   birdYSpeed = birdYSpeed + 516 * dt
   birdY = birdY + birdYSpeed * dt
-  
+  --[[
   -- pipe moving to left
   pipeX = pipeX - 60 * dt
   if pipeX + pipeWidth < 0 then
@@ -55,6 +51,7 @@ function love.update(dt)
   ) then
     love.load()
   end
+  ]]--
 end
 
 -- executes when any key pressed
@@ -63,6 +60,9 @@ function love.keypressed()
   if birdY > 0 then
     birdYSpeed = -165
   end
+  
+  pipe1SpaceY = newPipeSpaceY()
+  pipe2SpaceY = newPipeSpaceY()
 end
 
 function love.draw()
