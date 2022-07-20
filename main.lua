@@ -15,7 +15,9 @@ function love.update(dt)
 end
 
 function love.keypressed()
-  birdYSpeed = -165
+  if birdY > 0 then
+    birdYSpeed = -165
+  end
 end
 
 function love.draw()
