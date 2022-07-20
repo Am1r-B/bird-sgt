@@ -71,17 +71,16 @@ function love.update(dt)
     love.load()
   end
   
-  if upcomingPipe == 1
-  and birdX > pipe1X + pipeWidth then 
-    score = score + 1
-    upcomingPipe = 2
+  local function updateScoreAndClosestPipe(thisPipe, pipeX, otherPipe)
+    if upcomingPipe == thisPipe
+    and birdX > pipeX + pipeWidth then 
+      score = score + 1
+      upcomingPipe = otherPipe
+    end
   end
   
-  if upcomingPipe == 2
-  and birdX > pipe2X + pipeWidth then
-    score = score + 1
-    upcomingPipe = 1
-  end
+  updateScoreAndClosestPipe(1, pipe1X, 2)
+  updateScoreAndClosestPipe(2, pipe2X, 1)
 end
 
 -- executes when any key pressed
