@@ -1,0 +1,9 @@
+function love.load()
+  playingAreaWidth = 300
+  playingAreaHeight = 388
+end
+
+function love.draw()
+  love.graphics.setColor(.14, .36, .46)
+  love.graphics.rectangle('fill', 0, 0, playingAreaWidth, playingAreaHeight)
+end
