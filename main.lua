@@ -11,6 +11,7 @@ function love.load()
   pipeWidth = 54
   pipeSpaceHeight = 100
   
+  -- a function that resets pipe 
   function resetPipe()
     local pipeSpaceYMin = 54
     -- random pipe Space location
@@ -18,6 +19,7 @@ function love.load()
       pipeSpaceYMin,
       playingAreaHeight - pipeSpaceHeight - pipeSpaceYMin
     )
+    
     pipeX = playingAreaWidth
   end
   
@@ -33,6 +35,13 @@ function love.update(dt)
   pipeX = pipeX - 60 * dt
   if pipeX + pipeWidth < 0 then
     resetPipe()
+  end
+  
+  -- if bird collide with the top pipe segment
+  if birdX < pipeX + pipeWidth
+  and birdX + birdWidth > pipeX
+  and birdY < pipeSpaceY then
+    love.load()
   end
 end
 
