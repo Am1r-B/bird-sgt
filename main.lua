@@ -3,10 +3,8 @@ function love.load()
   playingAreaHeight = 388
   
   birdX = 62
-  birdY = 200
   birdWidth = 30
   birdHeight = 25
-  birdYSpeed = 0
   
   pipeWidth = 54
   pipeSpaceHeight = 100
@@ -21,15 +19,22 @@ function love.load()
     )
   end
   
-  pipe1X = playingAreaWidth
-  pipe1SpaceY = newPipeSpaceY()
-  
-  pipe2X = playingAreaWidth + (playingAreaWidth + pipeWidth)/2
-  pipe2SpaceY = newPipeSpaceY()
-  
-  score = 0
-  
-  upcomingPipe = 1
+  function reset()
+    birdY = 200
+    birdYSpeed = 0
+    
+    pipe1X = playingAreaWidth
+    pipe1SpaceY = newPipeSpaceY()
+    
+    pipe2X = playingAreaWidth + (playingAreaWidth + pipeWidth)/2
+    pipe2SpaceY = newPipeSpaceY()
+    
+    score = 0
+    
+    upcomingPipe = 1
+  end
+
+  reset()
 end
 
 function love.update(dt)
@@ -68,7 +73,7 @@ function love.update(dt)
   if isBirdCollidingWithPipe(pipe1X, pipe1SpaceY)
   or isBirdCollidingWithPipe(pipe2X, pipe2SpaceY) 
   or birdY > playingAreaHeight then
-    love.load()
+    reset()
   end
   
   local function updateScoreAndClosestPipe(thisPipe, pipeX, otherPipe)
@@ -89,7 +94,6 @@ function love.keypressed()
   if birdY > 0 then
     birdYSpeed = -165
   end
-  
 end
 
 function love.draw()
@@ -102,7 +106,6 @@ function love.draw()
   love.graphics.rectangle('fill', birdX, birdY, birdWidth, birdHeight)
   
   local function drawPipe(pipeX, pipeSpaceY)
-    -- draw pipe
     love.graphics.setColor(.37, .82, .28)
     -- draw first segment
     love.graphics.rectangle(
@@ -126,6 +129,7 @@ function love.draw()
   drawPipe(pipe1X, pipe1SpaceY)
   drawPipe(pipe2X, pipe2SpaceY)
   
+  -- draw score
   love.graphics.setColor(1, 1, 1)
   love.graphics.print(score, 15, 15)
 end
