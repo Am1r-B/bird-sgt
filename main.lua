@@ -9,6 +9,8 @@ function love.load()
   birdYSpeed = 0
   
   pipeWidth = 54
+  pipeSpaceY = 100
+  pipeSpaceHeight = 150
 end
 
 function love.update(dt)
@@ -36,5 +38,17 @@ function love.draw()
   
   -- draw pipe
   love.graphics.setColor(.37, .82, .28)
-  love.graphics.rectangle('fill', playingAreaWidth, 0, pipeWidth, playingAreaHeight)
+  love.graphics.rectangle(
+    'fill',
+    playingAreaWidth,
+    0,
+    pipeWidth,
+    pipeSpaceY
+  )
+  love.graphics.rectangle(
+    'fill',
+    playingAreaWidth,
+    pipeSpaceY + pipeSpaceHeight,
+    pipeWidth, playingAreaHeight - pipeSpaceY - pipeSpaceHeight
+  )
 end
