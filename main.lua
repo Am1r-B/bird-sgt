@@ -7,14 +7,19 @@ function love.load()
   birdWidth = 30
   birdHeight = 25
   birdYSpeed = 0
+  
+  pipeWidth = 54
 end
 
 function love.update(dt)
+  -- bird falling down
   birdYSpeed = birdYSpeed + 516 * dt
   birdY = birdY + birdYSpeed * dt
 end
 
+-- executes when any key pressed
 function love.keypressed()
+  -- bird only flaps when its on the screen
   if birdY > 0 then
     birdYSpeed = -165
   end
@@ -28,4 +33,8 @@ function love.draw()
   -- draw bird
   love.graphics.setColor(.87, .84, .27)
   love.graphics.rectangle('fill', birdX, birdY, birdWidth, birdHeight)
+  
+  -- draw pipe
+  love.graphics.setColor(.37, .82, .28)
+  love.graphics.rectangle('fill', playingAreaWidth, 0, pipeWidth, playingAreaHeight)
 end
