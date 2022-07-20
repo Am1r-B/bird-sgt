@@ -11,7 +11,7 @@ function love.load()
   pipeWidth = 54
   pipeSpaceHeight = 100
   
-  -- a function that resets pipe 
+  -- a function that gives new pipeSpaceY to pipe 
   function newPipeSpaceY()
     local pipeSpaceYMin = 54
     -- random pipe Space location
@@ -21,10 +21,10 @@ function love.load()
     )
   end
   
-  pipe1X = 100
+  pipe1X = playingAreaWidth
   pipe1SpaceY = newPipeSpaceY()
   
-  pipe2X = 200
+  pipe2X = playingAreaWidth + (playingAreaWidth + pipeWidth)/2
   pipe2SpaceY = newPipeSpaceY()
 end
 
@@ -33,8 +33,7 @@ function love.update(dt)
   birdYSpeed = birdYSpeed + 516 * dt
   birdY = birdY + birdYSpeed * dt
   
-  
-  function movePipe(pipeX, pipeSpaceY)
+  local function movePipe(pipeX, pipeSpaceY)
     -- pipe moving to left
     pipeX = pipeX - 60 * dt
     
@@ -70,6 +69,7 @@ function love.keypressed()
   if birdY > 0 then
     birdYSpeed = -165
   end
+  
 end
 
 function love.draw()
