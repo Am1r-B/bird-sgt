@@ -24,6 +24,12 @@ function love.load()
   end
   
   resetPipe()
+  
+  pipe1X = 100
+  pipe1SpaceY = 100
+  
+  pipe2X = 200
+  pipe2SpaceY = 200
 end
 
 function love.update(dt)
@@ -68,22 +74,27 @@ function love.draw()
   love.graphics.setColor(.87, .84, .27)
   love.graphics.rectangle('fill', birdX, birdY, birdWidth, birdHeight)
   
-  -- draw pipe
-  love.graphics.setColor(.37, .82, .28)
-  -- draw first segment
-  love.graphics.rectangle(
-    'fill',
-    pipeX,
-    0,
-    pipeWidth,
-    pipeSpaceY
-  )
-  -- draw second segment
-  love.graphics.rectangle(
-    'fill',
-    pipeX,
-    pipeSpaceY + pipeSpaceHeight,
-    pipeWidth,
-    playingAreaHeight - pipeSpaceY - pipeSpaceHeight
-  )
+  local function drawPipe(pipeX, pipeSpaceY)
+    -- draw pipe
+    love.graphics.setColor(.37, .82, .28)
+    -- draw first segment
+    love.graphics.rectangle(
+      'fill',
+      pipeX,
+      0,
+      pipeWidth,
+      pipeSpaceY
+    )
+    -- draw second segment
+    love.graphics.rectangle(
+      'fill',
+      pipeX,
+      pipeSpaceY + pipeSpaceHeight,
+      pipeWidth,
+      playingAreaHeight - pipeSpaceY - pipeSpaceHeight
+    )
+  end
+  
+  drawPipe(pipe1X, pipe1SpaceY)
+  drawPipe(pipe2X, pipe2SpaceY)
 end
