@@ -32,13 +32,23 @@ function love.update(dt)
   -- bird falling down
   birdYSpeed = birdYSpeed + 516 * dt
   birdY = birdY + birdYSpeed * dt
-  --[[
-  -- pipe moving to left
-  pipeX = pipeX - 60 * dt
-  if pipeX + pipeWidth < 0 then
-    resetPipe()
+  
+  
+  function movePipe(pipeX, pipeSpaceY)
+    -- pipe moving to left
+    pipeX = pipeX - 60 * dt
+    
+    if pipeX + pipeWidth < 0 then
+      pipeX = playingAreaWidth
+      pipeSpaceY = newPipeSpaceY()
+    end
+    
+    return pipeX, pipeSpaceY
   end
   
+  pipe1X, pipe1SpaceY = movePipe(pipe1X, pipe1SpaceY)
+  pipe2X, pipe2SpaceY = movePipe(pipe2X, pipe2SpaceY)
+  --[[
   -- if bird collide with the pipe
   if
   birdX < pipeX + pipeWidth
@@ -60,9 +70,6 @@ function love.keypressed()
   if birdY > 0 then
     birdYSpeed = -165
   end
-  
-  pipe1SpaceY = newPipeSpaceY()
-  pipe2SpaceY = newPipeSpaceY()
 end
 
 function love.draw()
