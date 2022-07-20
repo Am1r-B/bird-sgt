@@ -10,13 +10,18 @@ function love.load()
   
   pipeWidth = 54
   pipeSpaceHeight = 100
-  local pipeSpaceYMin = 54
-  -- random pipe Space location
-  pipeSpaceY = love.math.random(
-    pipeSpaceYMin,
-    playingAreaHeight - pipeSpaceHeight - pipeSpaceYMin
-  )
-  pipeX = playingAreaWidth
+  
+  function resetPipe()
+    local pipeSpaceYMin = 54
+    -- random pipe Space location
+    pipeSpaceY = love.math.random(
+      pipeSpaceYMin,
+      playingAreaHeight - pipeSpaceHeight - pipeSpaceYMin
+    )
+    pipeX = playingAreaWidth
+  end
+  
+  resetPipe()
 end
 
 function love.update(dt)
@@ -26,6 +31,9 @@ function love.update(dt)
   
   -- pipe moving to left
   pipeX = pipeX - 60 * dt
+  if pipeX + pipeWidth < 0 then
+    resetPipe()
+  end
 end
 
 -- executes when any key pressed
