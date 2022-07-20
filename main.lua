@@ -47,20 +47,24 @@ function love.update(dt)
   
   pipe1X, pipe1SpaceY = movePipe(pipe1X, pipe1SpaceY)
   pipe2X, pipe2SpaceY = movePipe(pipe2X, pipe2SpaceY)
-  --[[
-  -- if bird collide with the pipe
-  if
-  birdX < pipeX + pipeWidth
-  and
-  birdX + birdWidth > pipeX
-  and (
-    birdY < pipeSpaceY
-    or
-    birdY + birdHeight > pipeSpaceY + pipeSpaceHeight
-  ) then
+  
+  function isBirdCollidingWithPipe(pipeX, pipeSpaceY)
+    -- if bird collide with the pipe
+    return
+    birdX < pipeX + pipeWidth
+    and
+    birdX + birdWidth > pipeX
+    and (
+      birdY < pipeSpaceY
+      or
+      birdY + birdHeight > pipeSpaceY + pipeSpaceHeight
+    )
+  end
+  
+  if isBirdCollidingWithPipe(pipe1X, pipe1SpaceY)
+  or isBirdCollidingWithPipe(pipe2X, pipe2SpaceY) then
     love.load()
   end
-  ]]--
 end
 
 -- executes when any key pressed
