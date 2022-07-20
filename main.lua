@@ -68,6 +68,10 @@ function love.update(dt)
   or birdY > playingAreaHeight then
     love.load()
   end
+  
+  if birdX > pipe1X + pipeWidth then 
+    score = score + 1
+  end
 end
 
 -- executes when any key pressed
