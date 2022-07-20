@@ -10,7 +10,10 @@ function love.load()
   
   pipeWidth = 54
   pipeSpaceHeight = 100
-  pipeSpaceY = love.math.random(0, playingAreaHeight - pipeSpaceHeight)
+  local pipeSpaceYMin = 54
+  pipeSpaceY = love.math.random(
+    pipeSpaceYMin,
+    playingAreaHeight - pipeSpaceHeight - pipeSpaceYMin)
 end
 
 function love.update(dt)
