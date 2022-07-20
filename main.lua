@@ -11,15 +11,21 @@ function love.load()
   pipeWidth = 54
   pipeSpaceHeight = 100
   local pipeSpaceYMin = 54
+  -- random pipe Space location
   pipeSpaceY = love.math.random(
     pipeSpaceYMin,
-    playingAreaHeight - pipeSpaceHeight - pipeSpaceYMin)
+    playingAreaHeight - pipeSpaceHeight - pipeSpaceYMin
+  )
+  pipeX = playingAreaWidth
 end
 
 function love.update(dt)
   -- bird falling down
   birdYSpeed = birdYSpeed + 516 * dt
   birdY = birdY + birdYSpeed * dt
+  
+  -- pipe moving to left
+  pipeX = pipeX - 60 * dt
 end
 
 -- executes when any key pressed
@@ -44,7 +50,7 @@ function love.draw()
   -- draw first segment
   love.graphics.rectangle(
     'fill',
-    playingAreaWidth,
+    pipeX,
     0,
     pipeWidth,
     pipeSpaceY
@@ -52,7 +58,7 @@ function love.draw()
   -- draw second segment
   love.graphics.rectangle(
     'fill',
-    playingAreaWidth,
+    pipeX,
     pipeSpaceY + pipeSpaceHeight,
     pipeWidth,
     playingAreaHeight - pipeSpaceY - pipeSpaceHeight
