@@ -9,8 +9,8 @@ function love.load()
   birdYSpeed = 0
   
   pipeWidth = 54
-  pipeSpaceY = 100
-  pipeSpaceHeight = 150
+  pipeSpaceHeight = 100
+  pipeSpaceY = love.math.random(0, playingAreaHeight - pipeSpaceHeight)
 end
 
 function love.update(dt)
@@ -38,6 +38,7 @@ function love.draw()
   
   -- draw pipe
   love.graphics.setColor(.37, .82, .28)
+  -- draw first segment
   love.graphics.rectangle(
     'fill',
     playingAreaWidth,
@@ -45,10 +46,12 @@ function love.draw()
     pipeWidth,
     pipeSpaceY
   )
+  -- draw second segment
   love.graphics.rectangle(
     'fill',
     playingAreaWidth,
     pipeSpaceY + pipeSpaceHeight,
-    pipeWidth, playingAreaHeight - pipeSpaceY - pipeSpaceHeight
+    pipeWidth,
+    playingAreaHeight - pipeSpaceY - pipeSpaceHeight
   )
 end
