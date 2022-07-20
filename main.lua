@@ -28,6 +28,8 @@ function love.load()
   pipe2SpaceY = newPipeSpaceY()
   
   score = 0
+  
+  upcomingPipe = 1
 end
 
 function love.update(dt)
@@ -69,8 +71,16 @@ function love.update(dt)
     love.load()
   end
   
-  if birdX > pipe1X + pipeWidth then 
+  if upcomingPipe == 1
+  and birdX > pipe1X + pipeWidth then 
     score = score + 1
+    upcomingPipe = 2
+  end
+  
+  if upcomingPipe == 2
+  and birdX > pipe2X + pipeWidth then
+    score = score + 1
+    upcomingPipe = 1
   end
 end
 
